@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { NextPage, GetServerSideProps } from "next";
-import { Button, Image, List } from 'semantic-ui-react'
+import { Item } from 'semantic-ui-react'
 import "semantic-ui-css/semantic.min.css";
 
 //レスポンスの型
@@ -49,29 +49,16 @@ interface IndexPageProps {
 
 const IndexPage: NextPage<IndexPageProps> = ({ books, bookDetails }) => {
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        minHeight: "100vh",
-      }}
-    >
-      <List divided verticalAlign='middle'>
+    <Item.Group divided>
         {bookDetails.map((data, index) => {
           return (
-              <List.Item key={index}>
-                <List.Content floated='right'>
-                  <Button>詳細を見る</Button>
-                </List.Content>
-                <Image avatar src={data.items[0].volumeInfo.imageLinks.smallThumbnail} />
-                <List.Content>{ data.items[0].volumeInfo.title }</List.Content>
-              </List.Item>
+            <Item key={index}>
+              <Item.Image size='tiny' src={data.items[0].volumeInfo.imageLinks.smallThumbnail} />
+              <Item.Content verticalAlign='middle'>{ data.items[0].volumeInfo.title }</Item.Content>
+            </Item>
           );
         })}
-      </List>
-    </div>
+    </Item.Group>
   );
 };
 
