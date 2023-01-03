@@ -1,12 +1,11 @@
 import { useState } from "react";
 import type { NextPage, GetServerSideProps } from "next";
-import { Item } from 'semantic-ui-react'
+import { Container, Header, Item } from 'semantic-ui-react'
 import "semantic-ui-css/semantic.min.css";
 
 //レスポンスの型
 interface Book {
   id: number
-  title: string
   isbn: number
 }
 type Books = Book[];
@@ -49,16 +48,20 @@ interface IndexPageProps {
 
 const IndexPage: NextPage<IndexPageProps> = ({ books, bookDetails }) => {
   return (
-    <Item.Group divided>
-        {bookDetails.map((data, index) => {
-          return (
-            <Item key={index}>
-              <Item.Image size='tiny' src={data.items[0].volumeInfo.imageLinks.smallThumbnail} />
-              <Item.Content verticalAlign='middle'>{ data.items[0].volumeInfo.title }</Item.Content>
-            </Item>
-          );
-        })}
-    </Item.Group>
+    <Container text>
+      <Header as='h2'>BOOK</Header>
+      <p>BOOK</p>
+      <Item.Group divided>
+          {bookDetails.map((data, index) => {
+            return (
+              <Item key={index}>
+                <Item.Image size='tiny' src={data.items[0].volumeInfo.imageLinks.smallThumbnail} />
+                <Item.Content verticalAlign='middle'>{ data.items[0].volumeInfo.title }</Item.Content>
+              </Item>
+            );
+          })}
+      </Item.Group>
+    </Container>
   );
 };
 
